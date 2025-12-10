@@ -1,0 +1,50 @@
+definitions:
+  entity.ApiRequest:
+    properties:
+      description:
+        maxLength: 120
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    required:
+    - name
+    type: object
+  entity.ApiResponse:
+    properties:
+      data: {}
+      error:
+        type: string
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/products:
+    post:
+      consumes:
+      - application/json
+      description: Ручка принимает json, приводит к типу json и добавляет 1 products
+        в products
+      parameters:
+      - description: Данные продукта
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ApiRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.ApiResponse'
+      summary: AddProduct
+      tags:
+      - AddProduct v1
+swagger: "2.0"
